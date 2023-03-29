@@ -1,6 +1,13 @@
 function ufs = conservative(M,alpha,gamma)
-%fsstate calculates the free stream state given a mach number M, an angle
-%of attack alpha in degrees, and a ratio of specific heats gamma
+
+% --inputs--
+% M          = Free stream Mach Number M
+% alpha      = An angle of attack alpha in degrees (not really used)
+% gamma      = Ratio of specific heats for gas (using air)
+%         ...
+%
+% --outputs--
+% ufs(1:4)   = Calculates the state vector of [/rho, /rho*u, /rho*v, E]
 
 ufs = zeros(1,4);
 
