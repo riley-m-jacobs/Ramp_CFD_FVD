@@ -3,4 +3,4 @@ This repo is a finite volume implementation (specifically implementing the Linea
 
 This is the first push on publishing my final project of my graduate level CFD course. For more information go to my website: rileymjacobs.com
 
-This code was helped by referencing both (couldn't have done it without them!): wme7/ApproximateRiemannSolvers as well as tategill/CFD_FVM. 
+
