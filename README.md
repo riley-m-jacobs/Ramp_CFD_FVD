@@ -1,12 +1,11 @@
 # Ramp_CFD_FVD
 This repository contains the final project for my graduate Computational Fluid Dynamics (CFD) class, COE 382Q. The project investigates investigates ramp compression and implements the Linearized Riemann Schemes of Roe and HLLE to simulate the behavior of air undergoing ramp compression. The results from both schemes are compared to evaluate their accuracy and efficiency. This project serves as a demonstration of the use of numerical methods in CFD for simulating compressible flow.
 
-Linearized Riemann Schemes
+Linearized Riemann Schemes:
 The Linearized Riemann Schemes of Roe and HLLE are numerical methods used to solve the Riemann problem, which describes the propagation of a shock wave. These schemes are widely used in CFD to simulate compressible flow.
 
 In this project, I implemented both the Roe and HLLE schemes to solve the Riemann problem for ramp compression of air. We then compared the results from both schemes to evaluate their accuracy and efficiency as well as compared to validation cases to check my solvers accuracy to theory and the literature.
 
-Repository Contents
 This repository contains the following files:
 
 main_driver.m: the main Matlab script that implements the Linearized Riemann Schemes of Roe and HLLE for ramp compression of air
