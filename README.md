@@ -1,4 +1,4 @@
-# Ramp_CFD_FVD
+# Ramp Compression CFD - Finite Volume Solver
 This repository contains the final project for my graduate Computational Fluid Dynamics (CFD) class, COE 382Q. The project investigates investigates ramp compression and implements the Linearized Riemann Schemes of Roe and HLLE to simulate the behavior of air undergoing ramp compression. The results from both schemes are compared to evaluate their accuracy and efficiency. This project serves as a demonstration of the use of numerical methods in CFD for simulating compressible flow.
 
 Linearized Riemann Schemes:
