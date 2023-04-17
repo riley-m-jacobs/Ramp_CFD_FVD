@@ -60,7 +60,7 @@ y_min_ramp = min(y_ramp);
 y_max_ramp = max(y_ramp);
 dx = x_max_ramp-x_min_ramp;
 
-% Slope quadrant
+% Ramp quadrant
 for i = 1:length(x_ramp)
     x_pt = x_ramp(i);
     y_slope(:,i) = linspace(y_ramp(i),y_max,n_y)';
@@ -146,6 +146,7 @@ for j = 1:n_y-1
         node2 = n_y*(j-1) + i+1;
         node3 = n_y*j + i;
         node4 = n_y*j + i+1;
+        
         % Assign the indices of the two triangles that make up the rectangle
         triangle1 = 2*(n_y-1)*(j-1) + 2*(i-1) + 1;
         triangle2 = triangle1 + 1;
@@ -213,11 +214,11 @@ end
 sizeS = max(max(E));
 S = spalloc(sizeS,sizeS,6*length(E(:,1))); % 6 per cell 
 
-%Create output matrix 
+% Create output matrix 
 C = zeros(6*length(E(:,1)),4);
 c = 1;
 
-%Loop over all elements
+% Loop over all elements
 for i = (1:length(E(:,1))) %i = triange number   
     for j = (1:3) 
         e = E(i,:); 
@@ -238,18 +239,17 @@ for i = (1:length(E(:,1))) %i = triange number
                 t2 = t0;
                 e2 = e0;
             end            
-            C(c,:) = [t1 e1 t2 e2]; %create new row in C
-            c = c+1; %increment c            
+            C(c,:) = [t1 e1 t2 e2]; 
+            c = c+1;            
         else
-            %store triange and edge number in S
             S = S + sparse(e(1),e(2),i,sizeS,sizeS,6*length(E(:,1))); 
             %S(e(1),e(2)) = i            
         end
     end
 end
 
-C = C(1:c-1,:); %trim C with c
-C = sortrows(C,[1 3]); %sort matrix C with correct rules
+C = C(1:c-1,:);
+C = sortrows(C,[1 3]); 
 
 %inedges = inedgedat(E,V,C);
 % Now define the interior edge data for the mesh
