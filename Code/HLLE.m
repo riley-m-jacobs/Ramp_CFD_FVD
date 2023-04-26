@@ -1,5 +1,6 @@
 function [HLLE,Se,error] = HLLE(primL, primR, n, gamma)
 
+%
 % This is the function for the HLLE
 % --inputs--
 % primL(1:4) = left state (rhoL, uL, vL, pL)
@@ -12,6 +13,7 @@ function [HLLE,Se,error] = HLLE(primL, primR, n, gamma)
 % HLLE(1:4)   = numerical flux for HLLE scheme
 % Se         = wave speed vector
 % error      = indicator if P < 0 --> will show an error quickly!
+%
 
 nx = n(1);
 ny = n(2);

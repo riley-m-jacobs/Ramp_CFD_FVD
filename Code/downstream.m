@@ -2,16 +2,16 @@ function [M2, M3] = downstream(M1,theta,gamma)
 % Call the Function
 [Oblique1] = rampshocks(theta,gamma,M1);
 
-fprintf('Results:\n')
+%fprintf('Results:\n')
 M2 = Oblique1(4);
-fprintf("Mach number after oblique shock: %.4f\n", M2);
+%fprintf("Mach number after oblique shock: %.4f\n", M2);
 
 % Input values for P-M (NEED TO HAVE THE AEROSPACE TOOLBOX INSTALLED)
 [~,nu,~] = flowprandtlmeyer(gamma,M2,'mach');
 vm3 = nu + theta;
 [M3,~,~] = flowprandtlmeyer(gamma,vm3,'nu');
 % Display results
-fprintf("Mach number after expansion fan: %.4f\n", M3);
+%fprintf("Mach number after expansion fan: %.4f\n", M3);
 end
 
 function [Oblique1] = rampshocks(theta,gamma,M1)

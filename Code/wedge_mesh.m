@@ -51,7 +51,7 @@ x_ramp = linspace(x_ramp_start, x_ramp_start + x_length, discretize);
 y_ramp = linspace(0, y_length, discretize);
 
 doublecheck = atand(y_length/x_length);
-fprintf('Theta = %0.4f', doublecheck)
+%fprintf('Theta = %0.4f', doublecheck)
 
 % Define the bounding box for the ramp
 x_min_ramp = min(x_ramp);
@@ -109,7 +109,7 @@ for i = 1:length(y(1,:))
     y(:,i) = ys(:,i)*(y_max-ymin) + ymin;
 end
 
-mesh(x,y,ones(size(x))) % verify!
+% mesh(x,y,ones(size(x))) % verify!
 
 X = x;
 Y = y;
