@@ -5,7 +5,7 @@ fig = 0;
 [M2,M3] = downstream(opts.Mfs,opts.thetad,opts.gamma); 
 
 if ( opts.sanity )
-    % Analytical Sanity Check
+   % Analytical Sanity Check
    fprintf('M2 = %4.5f, \nM3 = %4.5f\n', M2, M3);
 end
 
@@ -26,7 +26,6 @@ end
 % Define time step
 tend = 1e6;       % Time out time for steady state
 count_max = 100;  % Counter parameters for periodic state output
-%CFLmax = .4;      % Maximum CFL allowed for time stepping
 CFLTuner = 0;     % Initialize CFL Tuner in the off condition
     
 % Discretize time domain
@@ -50,7 +49,7 @@ S = zeros(size(E,1),1);            % Wave speed vector
 Rnorm = zeros(Niter,1);            % Log of residual norm 
 
 % Solver
-fprintf('\n<<<<< EULER SOLVER START >>>>>\n');
+fprintf('\n<<<<< RAMP SOLVER START >>>>>\n');
 
 % Initiate time trackers
 count = 0;
@@ -65,13 +64,14 @@ while t < tend
     end
 
     t = t + dt;
-    count = count + 1; %add value to counter
+    count = count + 1; % Add value to sanity check counter
 
     qo = q;
     
     %
     [R, SumR, error, dt_A] = euler_solver(opts.method,V,E,inedges,bedges,ufs,q,R,S,CFL,opts.gamma);
-    
+    %
+
     Rnorm(N) = sqrt(SumR);
 
     if  Rnorm(N) < 10^(-5)
@@ -82,9 +82,9 @@ while t < tend
 
     % Check CFL for errors
     if error == 1 
-        fprintf('Error occured!!: Back off on CFL! \n')
+        fprintf('Error occured!!! Back off on CFL! \n')
         CFLTuner = 1; % Back off on the CFL
-        q = u_safe; % rReset to previous safe state
+        q = u_safe;   % Reset to previous safe state
         continue 
     end  
 
@@ -112,7 +112,7 @@ while t < tend
 end
 
 if N == Niter
-    fprintf('/n...CAUTION...\n\n');
+    fprintf('/n...DIDNT CONVERGE...\n\n');
 end
 
 fprintf('/n...time is \n\n');
@@ -127,7 +127,7 @@ M = U./a;
 e = P./((opts.gamma-1)*q(:,1));   
 ss = log(P./r.^opts.gamma); 
 
-fprintf('<<<<< EULER SOLVER COMPLETE >>>>>\n\n');
+fprintf('<<<<< RAMP SOLVER COMPLETE >>>>>\n\n');
 
 %
 sol.rho = r;
@@ -217,7 +217,7 @@ if ( opts.pres_bot )
         P2_P1 = 2.19465313;
     end
 
-    [extract_line] = bottom_plot(V, E, prop);
+    [extract_line] = bottom_plot(n_y, V, E, prop);
     
     fig = fig + 1;
     figure(fig)
@@ -238,10 +238,11 @@ if ( opts.pres_bot )
 end
 
 if ( opts.mach_bot )
+
     prop_in = 'Mach';
     prop = M;
     
-    [extract_line] = bottom_plot(V, E, prop);
+    [extract_line] = bottom_plot(n_y, V, E, prop);
 
     fig = fig + 1;
     figure(fig)
@@ -251,7 +252,7 @@ if ( opts.mach_bot )
     plot([x_ramp_start,x_ramp_start+ x_length], [M2,M2],'black','linewidth',2,'HandleVisibility','off') 
     plot([x_ramp_start+ x_length,x_ramp_start+ x_length], [M3,M2],'black','linewidth',2,'HandleVisibility','off') 
     plot([x_ramp_start+ x_length,1.2], [M3,M3],'black','linewidth',2,'HandleVisibility','off')
-    plot(extract_line(:,1),extract_line(:,3),'--','linewidth',1.5,'DisplayName','HLLE')
+    plot(extract_line(:,1),extract_line(:,3),'--','linewidth',1.5,'DisplayName','Roe')
     legend
     xlim([0.4 1.2])
     ylabel(sprintf('%s',prop_in))

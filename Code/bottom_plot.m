@@ -1,4 +1,4 @@
-function [extract_line] = bottom_plot(V, E, prop)
+function [extract_line] = bottom_plot(n_y, V, E, prop)
 
 %
 % This is the function for plotting along the bottom boundary
